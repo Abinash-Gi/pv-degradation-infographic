@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard: PV System Degradation & Cost Recovery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .chart-container {
+            height: 400px;
+        }
+
+        .nav-link.active {
+            color: #1d4ed8;
+            border-bottom-color: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-blue-800">PV Degradation Analysis</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-700 border-b-2 border-transparent">Summary</a>
+                        <a href="#parameters" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-700 border-b-2 border-transparent">Parameters</a>
+                        <a href="#analysis" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-700 border-b-2 border-transparent">Economic Analysis</a>
+                        <a href="#charts" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-700 border-b-2 border-transparent">Charts</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <!-- Title Section -->
+        <section id="summary" class="text-center mb-16 scroll-mt-20">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Photovoltaic Degradation and Cost Recovery in Germany (5-100 kWp)</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">This dashboard presents a quantitative assessment of the economic impact of photovoltaic (PV) system degradation on cost recovery for installations in Germany, ranging from 5 kWp to 100 kWp. The analysis is based on simulations over a 25-year lifetime, evaluating key financial metrics under various degradation scenarios.</p>
+        </section>
+
+        <!-- Key Parameters Section -->
+        <section id="parameters" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Key Simulation Parameters</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="font-semibold text-lg text-blue-800">CAPEX</h3>
+                    <p class="text-2xl font-bold text-gray-900 mt-2">€1,100 - €1,650</p>
+                    <p class="text-sm text-gray-500">per kWp</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="font-semibold text-lg text-blue-800">O&M Costs</h3>
+                    <p class="text-2xl font-bold text-gray-900 mt-2">1.5%</p>
+                    <p class="text-sm text-gray-500">of CAPEX annually</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="font-semibold text-lg text-blue-800">Electricity Price</h3>
+                    <p class="text-2xl font-bold text-gray-900 mt-2">€0.2889/kWh</p>
+                    <p class="text-sm text-gray-500">(Self-consumption)</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="font-semibold text-lg text-blue-800">Annual Yield</h3>
+                    <p class="text-2xl font-bold text-gray-900 mt-2">1025 kWh/kWp</p>
+                    <p class="text-sm text-gray-500">Equivalent Operating Hours (EOH)</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Economic Analysis Table Section -->
+        <section id="analysis" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Economic Analysis Summary</h2>
+             <div class="bg-white p-6 rounded-lg shadow-lg overflow-x-auto">
+                <table id="summary-table" class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Capacity (kWp)</th>
+                            <th scope="col" class="px-6 py-3">Degradation (%)</th>
+                            <th scope="col" class="px-6 py-3">Payback (Years)</th>
+                            <th scope="col" class="px-6 py-3">ROI (%/year)</th>
+                            <th scope="col" class="px-6 py-3">LCOE (€/kWh)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section id="charts" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Visual Analysis</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-center">Payback Period vs. System Capacity</h3>
+                    <div class="chart-container">
+                        <canvas id="paybackChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-center">LCOE vs. System Capacity</h3>
+                    <div class="chart-container">
+                        <canvas id="lcoeChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg lg:col-span-2">
+                     <div class="flex justify-center items-center mb-4">
+                        <label for="system_capacity_selector" class="mr-2 text-sm font-medium">Select System Capacity (kWp):</label>
+                        <select id="system_capacity_selector" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2">
+                            <option value="5" selected>5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-center">Annual Yield Over Time</h3>
+                            <div class="chart-container">
+                                <canvas id="yieldChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                           <h3 class="text-xl font-semibold mb-4 text-center">Cumulative Net Cashflow</h3>
+                            <div class="chart-container">
+                                <canvas id="cashflowChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Data extracted and adapted from the research paper and notebook
+            const economicData = {
+                5: { 0.0: { payback: 6.08, roi: 16.45, lcoe: 0.0885 }, 0.5: { payback: 6.17, roi: 16.22, lcoe: 0.0940 }, 0.6: { payback: 6.18, roi: 16.17, lcoe: 0.0951 }, 0.7: { payback: 6.20, roi: 16.12, lcoe: 0.0962 } },
+                10: { 0.0: { payback: 5.48, roi: 18.24, lcoe: 0.0805 }, 0.5: { payback: 5.55, roi: 18.02, lcoe: 0.0854 }, 0.6: { payback: 5.56, roi: 17.97, lcoe: 0.0864 }, 0.7: { payback: 5.58, roi: 17.92, lcoe: 0.0875 } },
+                20: { 0.0: { payback: 4.88, roi: 20.49, lcoe: 0.0724 }, 0.5: { payback: 4.94, roi: 20.24, lcoe: 0.0768 }, 0.6: { payback: 4.96, roi: 20.17, lcoe: 0.0778 }, 0.7: { payback: 4.97, roi: 20.10, lcoe: 0.0787 } },
+                50: { 0.0: { payback: 4.29, roi: 23.31, lcoe: 0.0664 }, 0.5: { payback: 4.34, roi: 23.04, lcoe: 0.0704 }, 0.6: { payback: 4.35, roi: 22.97, lcoe: 0.0713 }, 0.7: { payback: 4.37, roi: 22.89, lcoe: 0.0722 } },
+                100: { 0.0: { payback: 3.93, roi: 25.45, lcoe: 0.0624 }, 0.5: { payback: 3.97, roi: 25.17, lcoe: 0.0661 }, 0.6: { payback: 3.99, roi: 25.08, lcoe: 0.0669 }, 0.7: { payback: 4.00, roi: 24.99, lcoe: 0.0677 } }
+            };
+            
+            // Populate the summary table
+            const tableBody = document.getElementById('summary-table').getElementsByTagName('tbody')[0];
+            Object.keys(economicData).forEach(capacity => {
+                Object.keys(economicData[capacity]).forEach(degradation => {
+                    const data = economicData[capacity][degradation];
+                    let row = tableBody.insertRow();
+                    row.className = 'bg-white border-b';
+                    row.innerHTML = `<td class="px-6 py-4">${capacity}</td>
+                                     <td class="px-6 py-4">${degradation}</td>
+                                     <td class="px-6 py-4">${data.payback.toFixed(2)}</td>
+                                     <td class="px-6 py-4">${data.roi.toFixed(2)}</td>
+                                     <td class="px-6 py-4">${data.lcoe.toFixed(4)}</td>`;
+                });
+            });
+
+            // --- CHART UPDATES START HERE ---
+            const degradationRatesForCharts = [0.0, 0.5, 0.6, 0.7];
+            const paybackColors = ['rgba(59, 130, 246, 0.8)', 'rgba(37, 99, 235, 0.8)', 'rgba(30, 80, 200, 0.8)', 'rgba(29, 78, 216, 0.8)'];
+            const lcoeColors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'];
+
+            // Chart 1: Payback Period
+            const paybackCtx = document.getElementById('paybackChart').getContext('2d');
+            const paybackChart = new Chart(paybackCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(economicData),
+                    datasets: degradationRatesForCharts.map((deg, index) => ({
+                        label: `${deg}% Degradation`,
+                        data: Object.keys(economicData).map(cap => economicData[cap][deg].payback),
+                        backgroundColor: paybackColors[index],
+                        borderColor: paybackColors[index].replace('0.8', '1'),
+                        borderWidth: 1
+                    }))
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { x: { title: { display: true, text: 'Capacity (kWp)' } }, y: { title: { display: true, text: 'Payback Period (Years)' } } }
+                }
+            });
+
+            // Chart 2: LCOE
+            const lcoeCtx = document.getElementById('lcoeChart').getContext('2d');
+            const lcoeChart = new Chart(lcoeCtx, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(economicData),
+                    datasets: degradationRatesForCharts.map((deg, index) => ({
+                        label: `${deg}% Degradation`,
+                        data: Object.keys(economicData).map(cap => economicData[cap][deg].lcoe),
+                        borderColor: lcoeColors[index],
+                        tension: 0.1,
+                        fill: false
+                    }))
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { x: { title: { display: true, text: 'Capacity (kWp)' } }, y: { title: { display: true, text: 'LCOE (€/kWh)' } } }
+                }
+            });
+            // --- CHART UPDATES END HERE ---
+            
+            // Dynamic Charts
+            let yieldChart, cashflowChart;
+
+            function updateDynamicCharts(capacity) {
+                const YEARS = 25;
+                const EOH = 1025;
+                const PRICE = 0.2889;
+                const OM_PERCENT = 0.015;
+                const CAPEX_PER_KWP = { 5: 1650, 10: 1500, 20: 1350, 50: 1200, 100: 1100 };
+
+                const degradationRates = [0.0, 0.005, 0.006, 0.007];
+                const chartData = {
+                    yields: [],
+                    cashflows: []
+                };
+
+                degradationRates.forEach(deg => {
+                    let cum_cf = -capacity * CAPEX_PER_KWP[capacity];
+                    const om_cost = capacity * CAPEX_PER_KWP[capacity] * OM_PERCENT;
+                    const yieldData = [];
+                    const cashflowData = [];
+
+                    for (let yr = 1; yr <= YEARS; yr++) {
+                        const annual_yield = capacity * EOH * Math.pow(1 - deg, yr - 1);
+                        const savings = annual_yield * PRICE;
+                        const net_cf = savings - om_cost;
+                        cum_cf += net_cf;
+                        yieldData.push(annual_yield);
+                        cashflowData.push(cum_cf);
+                    }
+                    chartData.yields.push(yieldData);
+                    chartData.cashflows.push(cashflowData);
+                });
+                
+                const yearLabels = Array.from({ length: YEARS }, (_, i) => i + 1);
+                const dynamicChartColors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'];
+
+                // Update Yield Chart
+                if (yieldChart) yieldChart.destroy();
+                yieldChart = new Chart(document.getElementById('yieldChart').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: yearLabels,
+                        datasets: degradationRates.map((deg, i) => ({
+                            label: `${(deg * 100).toFixed(1)}% Degradation`,
+                            data: chartData.yields[i],
+                            borderColor: dynamicChartColors[i],
+                            fill: false
+                        }))
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'Year' } }, y: { title: { display: true, text: 'Annual Yield (kWh)' } } } }
+                });
+
+                // Update Cashflow Chart
+                if (cashflowChart) cashflowChart.destroy();
+                cashflowChart = new Chart(document.getElementById('cashflowChart').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: yearLabels,
+                        datasets: degradationRates.map((deg, i) => ({
+                            label: `${(deg * 100).toFixed(1)}% Degradation`,
+                            data: chartData.cashflows[i],
+                            borderColor: dynamicChartColors[i],
+                            fill: false
+                        }))
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'Year' } }, y: { title: { display: true, text: 'Cumulative Net Cashflow (€)' } } } }
+                });
+            }
+
+            const selector = document.getElementById('system_capacity_selector');
+            selector.addEventListener('change', (event) => {
+                updateDynamicCharts(event.target.value);
+            });
+            // Initial chart generation
+            updateDynamicCharts(selector.value);
+            
+            // Active nav link on scroll
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main > section');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= sectionTop - 80) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active', 'text-blue-700', 'border-blue-700');
+                    if(link.hash.substring(1) === current) {
+                         link.classList.add('active', 'text-blue-700', 'border-blue-700');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
