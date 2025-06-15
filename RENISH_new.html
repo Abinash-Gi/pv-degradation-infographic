@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wind Turbine Predictive Maintenance Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Lighter slate background */
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Adding a subtle transition for all interactive elements */
+        .card, .table tbody tr, .nav-link {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-700">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50">
+            <div class="container mx-auto flex justify-between items-center p-4">
+                <div class="flex items-center space-x-3">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <h1 class="text-xl font-bold text-slate-800">Wind Turbine PdM Insights</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6 text-sm font-medium">
+                        <li><a href="#overview" class="nav-link text-slate-600 hover:text-blue-600">Overview</a></li>
+                        <li><a href="#models" class="nav-link text-slate-600 hover:text-blue-600">ML Models</a></li>
+                        <li><a href="#impact" class="nav-link text-slate-600 hover:text-blue-600">Impact</a></li>
+                        <li><a href="#suitability" class="nav-link text-slate-600 hover:text-blue-600">Suitability</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
+            <!-- Overview Section -->
+            <section id="overview" class="mb-12">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900">Dashboard Overview</h2>
+                    <p class="mt-2 text-lg text-slate-600 max-w-3xl mx-auto">
+                        Key insights on applying Machine Learning to predict wind turbine blade failures and optimize maintenance costs.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Stat Card 1 -->
+                    <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-lg hover:-translate-y-1">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-semibold text-slate-500 uppercase">Avg. Detection Accuracy</p>
+                            <div class="bg-blue-100 text-blue-600 p-2 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                            </div>
+                        </div>
+                        <p class="text-4xl font-extrabold text-slate-800 mt-2">~90%+</p>
+                    </div>
+                    <!-- Stat Card 2 -->
+                    <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-lg hover:-translate-y-1">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-semibold text-slate-500 uppercase">Cost Reduction</p>
+                             <div class="bg-green-100 text-green-600 p-2 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V4m0 8v4m-6 0h12" /></svg>
+                            </div>
+                        </div>
+                        <p class="text-4xl font-extrabold text-slate-800 mt-2">20-30%</p>
+                    </div>
+                    <!-- Stat Card 3 -->
+                    <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 hover:shadow-lg hover:-translate-y-1">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-semibold text-slate-500 uppercase">Downtime Reduction</p>
+                             <div class="bg-purple-100 text-purple-600 p-2 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                        </div>
+                        <p class="text-4xl font-extrabold text-slate-800 mt-2">~40%</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ML Models Section -->
+            <section id="models" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60 mb-12">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">Machine Learning Model Comparison</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">ML Model</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Typical Accuracy</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">False Alarm Rate</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Maintenance Cost Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-200">
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Support Vector Machine (SVM)</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">80–95% accuracy in fault classification.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Requires careful tuning to avoid moderate false alarms.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Reduces missed failures, but false alarms can be costly.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Random Forest</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Handles complex features with 80-97% accuracy.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Low false positive bias if well-trained.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Fewer false alarms lead to more warranted maintenance.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">K-Nearest Neighbours (KNN)</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Accuracy varies (60-97%) on data quality.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Feature selection reduces false alarms.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Low computational cost; effective if tuned well.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Deep Learning (e.g., CNNs)</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Typically >90% accuracy; can reach 99%.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Very low false alarms with extensive training.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">High initial cost, but high potential for long-term ROI.</td>
+                            </tr>
+                             <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Unsupervised Learning</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Detects novel/unseen faults without labels.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Calibration is key to balance alarms and misses.</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Catches unforeseen issues; prevents major failures.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Impact Analysis Section -->
+            <section id="impact" class="mb-12">
+                 <div class="text-left mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900">Impact of Predictive Maintenance</h2>
+                    <p class="mt-2 text-md text-slate-600 max-w-3xl">
+                        By catching faults early, operators can prevent catastrophic failures, scheduling repairs during planned, low-cost windows.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Chart 1  -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Relative Reduction in Costs & Downtime</h3>
+                        <div class="space-y-5 mt-6">
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-sm font-medium text-slate-600">Maintenance Cost</span>
+                                    <span class="text-sm font-bold text-blue-600">-25%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-sm font-medium text-slate-600">Downtime</span>
+                                    <span class="text-sm font-bold text-purple-600">-40%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                    <div class="bg-purple-500 h-2.5 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Total Cost Impact Breakdown (Conceptual)</h3>
+                         <div class="w-full bg-slate-200 rounded-full h-8 flex mt-6">
+                            <div class="bg-green-500 flex items-center justify-center text-white text-xs font-bold" style="width: 8%" title="O&M Cost Reduction">8%</div>
+                            <div class="bg-teal-500 flex items-center justify-center text-white text-xs font-bold" style="width: 11%" title="Downtime Reduction">11%</div>
+                             <div class="bg-slate-300 flex-grow flex items-center justify-center text-slate-600 text-xs font-medium" title="Other Costs">Remaining Costs</div>
+                        </div>
+                         <div class="flex space-x-4 mt-4 text-xs">
+                            <div class="flex items-center"><span class="h-3 w-3 rounded-full bg-green-500 mr-2"></span>O&M Cost Reduction</div>
+                            <div class="flex items-center"><span class="h-3 w-3 rounded-full bg-teal-500 mr-2"></span>Downtime Reduction</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ML Model Suitability Section -->
+            <section id="suitability" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/60">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">ML Model Suitability Guide</h2>
+                 <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Operational Condition</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Recommended Model (Best to Least)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-200">
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">High-noise environment</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Random Forest → Transformer → CNN → SVM</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Limited data availability</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Logistic Regression → SVM → Decision Tree → KNN</td>
+                            </tr>
+                             <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Early predictive analytics</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Transformer → CNN → Random Forest → SVM</td>
+                            </tr>
+                             <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Cost-sensitive (low false alarms)</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Logistic Regression → SVM → Random Forest</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">High interpretability</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Decision Tree → Logistic Regression → KNN → Random Forest</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-800 text-slate-400 p-6 mt-12">
+            <div class="container mx-auto text-center text-sm">
+                <p>&copy; 2025 Wind Turbine Predictive Maintenance Dashboard. All rights reserved.</p>
+                <p class="mt-2">Insights based on the research paper by Renishkumar Mavani.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
