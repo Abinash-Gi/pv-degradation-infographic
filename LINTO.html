@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard: Perovskite-Silicon Solar Cell Advancements (2018-2025)</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js for interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Lucide Icons for UI elements -->
+    <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide-react.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Custom Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* A light gray background */
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 100%;
+        }
+        .timeline-item.active {
+            background-color: #3b82f6; /* Blue-500 */
+            color: white;
+        }
+        .timeline-item.active span {
+             font-weight: 700;
+        }
+        .card-glow {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Perovskite-Silicon Solar Cell Advancements</h1>
+            <p class="text-md md:text-lg text-gray-600 mt-2">An Interactive Dashboard Based on Research from 2018-2025</p>
+        </header>
+
+        <!-- Key Metrics Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4">
+                <div class="bg-blue-100 p-3 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap text-blue-600"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-sm">Record 2T Efficiency</p>
+                    <p class="text-2xl font-bold">32.5%</p>
+                    <p class="text-xs text-gray-400">Achieved in 2024</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4 card-glow">
+                 <div class="bg-green-100 p-3 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up text-green-600"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-sm">Total Growth (2018-2024)</p>
+                    <p class="text-2xl font-bold">+7.3%</p>
+                     <p class="text-xs text-gray-400">Absolute increase</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4">
+                 <div class="bg-purple-100 p-3 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers text-purple-600"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-sm">Record 4T Efficiency</p>
+                    <p class="text-2xl font-bold">30.4%</p>
+                    <p class="text-xs text-gray-400">Achieved in 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Progress Chart & Device Structure -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Efficiency Progress Chart -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-xl font-bold mb-4">Efficiency Progress of Perovskite-Silicon Tandem Cells</h2>
+                    <div class="chart-container">
+                        <canvas id="efficiencyProgressChart"></canvas>
+                    </div>
+                </div>
+                <!-- Device Architecture -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-xl font-bold mb-4">Tandem Solar Cell Architecture</h2>
+                    <div id="device-layers" class="relative w-full max-w-lg mx-auto mt-6 text-center text-sm font-medium">
+                        <!-- Layer descriptions will be populated by JS -->
+                        <div id="layer-description" class="h-10 mb-2 text-blue-600 font-semibold text-lg transition-opacity duration-300">Hover over a layer</div>
+                         <div class="flex flex-col-reverse"> <!-- Reversed to stack from bottom-up visually -->
+                            <div class="layer-item bg-gray-400" data-desc="Ag: Rear metal contact for electrical connection.">Ag (Silver)</div>
+                            <div class="layer-item bg-gray-300" data-desc="ZnO:Al: Provides reflection and electrical contact.">ZnO:Al</div>
+                            <div class="layer-item bg-cyan-400" data-desc="a-Si:H (p): Doped hydrogenated amorphous silicon layer.">a-Si:H (p)</div>
+                            <div class="layer-item bg-cyan-500" data-desc="a-Si:H (i): Intrinsic hydrogenated amorphous silicon layer.">a-Si:H (i)</div>
+                            <div class="layer-item bg-cyan-600" data-desc="Silicon: Crystalline silicon wafer, the bottom cell absorber.">Silicon Wafer</div>
+                            <div class="layer-item bg-cyan-300" data-desc="nc-SiOx:H: Nanocrystalline silicon oxide, part of the tunnel junction.">nc-SiOx:H</div>
+                            <div class="layer-item bg-indigo-300" data-desc="ITO: Transparent conductive oxide, part of the tunnel junction.">ITO</div>
+                            <div class="layer-item bg-purple-400" data-desc="PTAA: Hole transport layer.">PTAA</div>
+                            <div class="layer-item bg-red-500 text-white font-bold" data-desc="Perovskite: The top cell, absorbs high-energy visible light.">Perovskite</div>
+                            <div class="layer-item bg-yellow-300" data-desc="C60: Electron transport layer.">C60</div>
+                            <div class="layer-item bg-yellow-200" data-desc="SnO2: Electron transport and buffer layer.">SnO2</div>
+                            <div class="layer-item bg-blue-300" data-desc="IZO: Indium Zinc Oxide, a transparent top contact.">IZO</div>
+                            <div class="layer-item bg-gray-600 text-white" data-desc="LM Foil: Light management foil to reduce reflection.">Light Management Foil</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Timeline of Innovations -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-bold mb-4">Timeline of Key Innovations</h2>
+                <div class="flex flex-col space-y-2">
+                    <!-- Timeline items -->
+                    <div id="timeline-2018" class="timeline-item p-3 rounded-lg cursor-pointer transition-all duration-200"><span>2018:</span> Nanocrystalline Tunnel Junctions</div>
+                    <div id="timeline-2019" class="timeline-item p-3 rounded-lg cursor-pointer transition-all duration-200"><span>2019:</span> SAM-Modified Interfaces</div>
+                    <div id="timeline-2020" class="timeline-item p-3 rounded-lg cursor-pointer transition-all duration-200"><span>2020:</span> Blade Coating for Scalability</div>
+                    <div id="timeline-2021" class="timeline-item p-3 rounded-lg cursor-pointer transition-all duration-200"><span>2021:</span> Bandgap Optimization</div>
+                    <div id="timeline-2022" class="timeline-item p-3 rounded-lg cursor-pointer transition-all duration-200"><span>2022:</span> Advanced Light Management</div>
+                    <div id="timeline-2023" class="timeline-item p-3 rounded-lg cursor-pointer transition-all duration-200"><span>2023:</span> Molecular Passivation</div>
+                    <div id="timeline-2024" class="timeline-item p-3 rounded-lg cursor-pointer transition-all duration-200"><span>2024:</span> Triple-Halide Perovskites</div>
+                    <div id="timeline-2025" class="timeline-item p-3 rounded-lg cursor-pointer transition-all duration-200"><span>2025:</span> High-Efficiency 4T Tandem</div>
+                </div>
+                <div id="timeline-details" class="mt-6 p-4 bg-gray-100 rounded-md border border-gray-200 min-h-[150px]">
+                    <!-- Details will be loaded here by JS -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Technology Comparison Chart -->
+        <div class="bg-white p-6 rounded-xl shadow-md mt-8">
+            <h2 class="text-xl font-bold mb-4">Context: Comparison of Laboratory Efficiencies</h2>
+             <div class="chart-container" style="height: 50vh;">
+                <canvas id="techComparisonChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Challenges Section -->
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold text-center mb-6">Key Challenges & Future Outlook</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-yellow-400">
+                    <h3 class="font-bold text-lg mb-2">Long-Term Stability</h3>
+                    <p class="text-gray-600 text-sm">Perovskite materials remain susceptible to degradation from heat, humidity, and UV radiation, posing a challenge for the 25-30 year lifespan expected of commercial modules.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-400">
+                    <h3 class="font-bold text-lg mb-2">Manufacturing Scalability</h3>
+                    <p class="text-gray-600 text-sm">Transitioning from lab-scale spin-coating to industrial methods like blade-coating while maintaining film uniformity and quality over large areas is a major hurdle.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-400">
+                    <h3 class="font-bold text-lg mb-2">Standardized Testing</h3>
+                    <p class="text-gray-600 text-sm">Inconsistent testing criteria and a need for real-world performance validation beyond AM1.5G conditions limit direct comparisons and deployment readiness.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 text-gray-500 text-xs">
+            <p>Dashboard generated based on the paper: "Enhancing the Efficiency of Silicon Solar Cells Through Perovskite Layer Integration: Advances and Challenges" by Linto Varughese.</p>
+            <p>Hochschule Ansbach - Smart Energy Systems</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- DATA FROM THE PAPER ---
+        const efficiencyData = {
+            years: [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+            efficiencies: [25.2, 28, 26, 28.2, 30, 31.25, 32.5]
+        };
+
+        const timelineDetails = {
+            '2018': { title: 'Nanocrystalline Tunnel Junctions (>25%)', desc: 'Integration of a nanocrystalline silicon tunnel junction enabled a certified efficiency of 25.2% in monolithic devices by facilitating effective carrier recombination on a fully textured silicon surface.' },
+            '2019': { title: 'SAM-Modified Interfaces (~28%)', desc: 'Using self-assembled monolayers (SAMs) like Me-4PACz at the perovskite interface reduced non-radiative recombination, improving energy level alignment and boosting open-circuit voltage.' },
+            '2020': { title: 'Blade Coating for Scale (~26%)', desc: 'Blade coating was demonstrated as a scalable alternative to spin-coating for depositing perovskite films on textured silicon, bringing tandems closer to industrial manufacturing.' },
+            '2021': { title: 'Bandgap Optimization (28.2%)', desc: 'A wide-bandgap (1.68 eV) perovskite top cell was engineered for robust performance under real-world conditions, focusing on spectral optimization and compositional stability.' },
+            '22022': { title: 'Light Management (>30%)', desc: 'Advanced light management with nano-textured surfaces and refined passivation layers pushed certified efficiencies beyond 30% by reducing reflection and enhancing light in-coupling.' },
+            '2023': { title: 'Molecular Passivation (31.25%)', desc: 'Precise control of surface chemistry using molecular interface layers regulated charge flow and trap density, unlocking efficiencies over 31% by achieving near-optimal voltages.' },
+            '2024': { title: 'Triple-Halide Perovskites (32.5%)', desc: 'A record efficiency of 32.5% was achieved by integrating stable triple-halide wide-bandgap perovskites with chemically engineered interface modifiers to reduce voltage loss.' },
+            '2025': { title: 'Transparent 4T Tandem (30.4%)', desc: 'A four-terminal tandem cell achieved 30.4% efficiency with a semitransparent perovskite top cell, demonstrating the high potential of electrically decoupled designs.' }
+        };
+        
+        const comparisonData = {
+            years: [1993, 1997, 2001, 2005, 2009, 2013, 2015, 2017, 2019, 2021],
+            technologies: [
+                { name: 'Perovskite on Si', data: [null, null, null, null, null, null, null, 25.5, 26.5, 29.5], color: '#ef4444' },
+                { name: 'Mono Crystalline Si', data: [23, 24, 24.5, 24.7, 25, 25.6, 25.8, 26.3, 26.6, 26.7], color: '#3b82f6' },
+                { name: 'Multi Crystalline Si', data: [17, 18.2, 19.8, 20.3, 20.4, 20.4, 20.8, 21.9, 22.3, 23.4], color: '#22d3ee' },
+                { name: 'CIGS', data: [15, 17.7, 18.2, 19.5, 20, 20.3, 21.7, 22.6, 23.3, 23.4], color: '#f97316' },
+                { name: 'CdTe', data: [15.8, 16, 16.5, 16.7, 16.7, 19.6, 21.5, 22.1, 22.1, 21.0], color: '#a855f7' },
+                { name: 'Perovskite', data: [null, null, null, null, 3.8, 15, 20.1, 22.7, 25.2, 25.5], color: '#facc15' },
+                { name: 'Organic', data: [null, null, null, 4, 6, 9, 10, 11, 11.5, 15.2], color: '#84cc16' }
+            ]
+        };
+
+
+        // --- CHART INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Chart 1: Efficiency Progress
+            const ctx1 = document.getElementById('efficiencyProgressChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: efficiencyData.years,
+                    datasets: [{
+                        label: 'Certified Efficiency (%)',
+                        data: efficiencyData.efficiencies,
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: '#2563eb',
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 24,
+                            title: { display: true, text: 'Efficiency (%)' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Year' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Efficiency: ${context.parsed.y}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Chart 2: Technology Comparison
+            const ctx2 = document.getElementById('techComparisonChart').getContext('2d');
+            new Chart(ctx2, {
+                 type: 'line',
+                 data: {
+                     labels: comparisonData.years,
+                     datasets: comparisonData.technologies.map(tech => ({
+                         label: tech.name,
+                         data: tech.data,
+                         borderColor: tech.color,
+                         backgroundColor: tech.color + '1A', // semi-transparent
+                         fill: false,
+                         tension: 0.1,
+                         pointRadius: 3,
+                         pointHoverRadius: 6,
+                         spanGaps: true, // Connect lines over null data points
+                     }))
+                 },
+                 options: {
+                     responsive: true,
+                     maintainAspectRatio: false,
+                      scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Laboratory Efficiency (%)' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Year' }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                             position: 'bottom',
+                        },
+                        tooltip: {
+                             mode: 'index',
+                             intersect: false,
+                        }
+                    },
+                 }
+            });
+
+
+            // --- INTERACTIVITY ---
+            // Timeline Logic
+            const timelineContainer = document.querySelector('.space-y-2');
+            const detailsContainer = document.getElementById('timeline-details');
+
+            function updateTimeline(year) {
+                // Update active state
+                document.querySelectorAll('.timeline-item').forEach(item => item.classList.remove('active'));
+                document.getElementById(`timeline-${year}`).classList.add('active');
+
+                // Update details
+                const detail = timelineDetails[year];
+                detailsContainer.innerHTML = `
+                    <h4 class="font-bold text-md mb-1">${detail.title}</h4>
+                    <p class="text-sm text-gray-700">${detail.desc}</p>
+                `;
+            }
+
+            timelineContainer.addEventListener('click', (e) => {
+                const target = e.target.closest('.timeline-item');
+                if (target) {
+                    const year = target.id.split('-')[1];
+                    updateTimeline(year);
+                }
+            });
+
+            // Set initial timeline state
+            updateTimeline('2018');
+            
+            
+            // Device Structure Logic
+            const layers = document.querySelectorAll('.layer-item');
+            const descriptionEl = document.getElementById('layer-description');
+            const initialDesc = descriptionEl.textContent;
+
+            layers.forEach(layer => {
+                layer.addEventListener('mouseover', () => {
+                    descriptionEl.textContent = layer.dataset.desc;
+                    descriptionEl.style.opacity = '1';
+                    layer.style.transform = 'scale(1.03)';
+                    layer.style.zIndex = '10';
+                    layer.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
+                });
+                layer.addEventListener('mouseout', () => {
+                    descriptionEl.textContent = initialDesc;
+                     descriptionEl.style.opacity = '1';
+                     layer.style.transform = 'scale(1)';
+                     layer.style.zIndex = '1';
+                     layer.style.boxShadow = 'none';
+                });
+            });
+            
+            // Style for the device structure layers
+            document.querySelectorAll('.layer-item').forEach(item => {
+                Object.assign(item.style, {
+                    padding: '8px',
+                    margin: '1px auto',
+                    width: '100%',
+                    color: item.classList.contains('text-white') ? 'white' : 'black',
+                    borderRadius: '4px',
+                    transition: 'all 0.2s ease-in-out',
+                    cursor: 'pointer',
+                    border: '1px solid rgba(0,0,0,0.1)'
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
