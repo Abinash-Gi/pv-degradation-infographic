@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wind Turbine Predictive Maintenance Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        .tab-button.active {
+            @apply bg-white text-blue-700 border-b-2 border-blue-700;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg p-6 rounded-b-lg">
+            <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+                <h1 class="text-3xl font-bold mb-2 sm:mb-0">Wind Turbine Predictive Maintenance</h1>
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="#overview" class="hover:text-blue-200 transition-colors duration-200">Overview</a></li>
+                        <li><a href="#models" class="hover:text-blue-200 transition-colors duration-200">ML Models</a></li>
+                        <li><a href="#impact" class="hover:text-blue-200 transition-colors duration-200">Impact Analysis</a></li>
+                        <li><a href="#suitability" class="hover:text-blue-200 transition-colors duration-200">Suitability</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
+            <!-- Overview Section -->
+            <section id="overview" class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">Dashboard Overview</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    This dashboard presents key insights into the application of Machine Learning (ML) techniques for wind turbine blade failure prediction,
+                    focusing on their implications for maintenance cost optimization, as derived from a comprehensive literature review.
+                    Early detection of blade faults through vibration data analysis enables proactive maintenance strategies, significantly reducing
+                    downtime and repair costs.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Stat Card 1 -->
+                    <div class="bg-blue-50 p-5 rounded-lg shadow flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-blue-600">Avg. Fault Detection Accuracy</p>
+                            <p class="text-3xl font-bold text-gray-900">~90%+</p>
+                        </div>
+                        <svg class="w-12 h-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    </div>
+                    <!-- Stat Card 2 -->
+                    <div class="bg-green-50 p-5 rounded-lg shadow flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-green-600">Potential Maintenance Cost Reduction</p>
+                            <p class="text-3xl font-bold text-gray-900">20-30%</p>
+                        </div>
+                        <svg class="w-12 h-12 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V4m0 8v4m-6 0h12"></path></svg>
+                    </div>
+                    <!-- Stat Card 3 -->
+                    <div class="bg-purple-50 p-5 rounded-lg shadow flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-purple-600">Downtime Reduction (Approx.)</p>
+                            <p class="text-3xl font-bold text-gray-900">~40%</p>
+                        </div>
+                        <svg class="w-12 h-12 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ML Models Section -->
+            <section id="models" class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">Machine Learning Model Comparison</h2>
+                <p class="text-gray-700 mb-6">
+                    A comparative analysis of state-of-the-art ML models used for wind turbine blade health monitoring.
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    ML Model
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Typical Accuracy
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    False Alarm Rate
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Maintenance Cost Impact
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Support Vector Machine (SVM)</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">80–95% accuracy in fault classification.</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Requires careful tuning to avoid moderate false alarms, especially with noisy data.</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">High accuracy reduces missed failures, but false alarms can cause unnecessary inspections.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Random Forest</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Handles complex features with 80-97% accuracy.</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Low false positive bias (if well-trained).</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Fast, robust prediction; fewer false alarms (if trained well) lead to warranted maintenance.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">K-Nearest Neighbours (KNN)</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Accuracy varies (60-97%) depending on data and feature selection.</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Feature selection reduces false alarms from overlapping clusters.</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Low computational cost, cost-effective maintenance if tuned for high accuracy.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Deep Learning (e.g., CNNs)</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Typically, >90% accuracy (large data); up to 99% reported.</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Very low false alarms with extensive training; risk if overfitting or unseen data (needs filters).</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">High initial cost (data/compute); potential for long-term ROI via early detection, but false alarms can be costly (needs tuning).</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Unsupervised Machine Learning</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">No fixed accuracy; detects novel faults. High precision in separating normal/abnormal data.</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Potential for false alarms or missed faults due to threshold; calibrate to turbine baseline.</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Catches unforeseen issues (requires tuning); prevents major failures if calibrated, but false alarms possible if not. Use with other methods for cost-efficiency.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Impact Analysis Section -->
+            <section id="impact" class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">Impact of Predictive Maintenance</h2>
+                <p class="text-gray-700 mb-6">
+                    Predictive maintenance enabled by ML models can dramatically reduce downtime and costs.
+                    By catching faults weeks in advance, blades can be replaced during planned maintenance windows,
+                    preventing catastrophic failures and associated higher costs.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Chart 1 Placeholder -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-medium text-gray-800 mb-4">Impact of ML-based Predictive Maintenance (Conceptual)</h3>
+                        <div class="flex flex-col space-y-4">
+                            <div class="flex items-center">
+                                <span class="text-gray-700 w-24">Maintenance Cost:</span>
+                                <div class="flex-grow bg-gray-200 rounded-full h-8 flex items-center overflow-hidden">
+                                    <div class="bg-blue-500 h-full rounded-full w-[75%] flex items-center justify-end pr-2 text-white font-bold text-sm">ML-based (75%)</div>
+                                    <div class="bg-gray-300 h-full rounded-full w-[25%] flex items-center justify-start pl-2 text-gray-600 text-sm">Traditional (100%)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-gray-700 w-24">Downtime:</span>
+                                <div class="flex-grow bg-gray-200 rounded-full h-8 flex items-center overflow-hidden">
+                                    <div class="bg-blue-500 h-full rounded-full w-[60%] flex items-center justify-end pr-2 text-white font-bold text-sm">ML-based (60%)</div>
+                                    <div class="bg-gray-300 h-full rounded-full w-[40%] flex items-center justify-start pl-2 text-gray-600 text-sm">Traditional (100%)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-4">
+                            Conceptual representation based on "Chart 1" from the document. Shows relative percentage reduction.
+                        </p>
+                    </div>
+
+                    <!-- Chart 2 Placeholder -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-xl font-medium text-gray-800 mb-4">Total Cost Impact of Predictive Maintenance (Conceptual)</h3>
+                        <div class="flex items-center">
+                            <span class="text-gray-700 w-24">Total Cost Impact:</span>
+                            <div class="flex-grow bg-gray-200 rounded-full h-8 flex items-center overflow-hidden">
+                                <div class="bg-blue-600 h-full w-[8%] flex items-center justify-center text-white font-bold text-sm" title="O&M Cost Reduction">8%</div>
+                                <div class="bg-green-500 h-full w-[11%] flex items-center justify-center text-white font-bold text-sm" title="Downtime Reduction">11%</div>
+                                <div class="bg-gray-300 h-full flex-grow flex items-center justify-center text-gray-600 text-sm" title="Other Costs">Other Costs</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-4">
+                            Conceptual representation based on "Chart 2" from the document. Represents percentage contribution.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ML Model Suitability Section -->
+            <section id="suitability" class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">ML Model Suitability Under Different Operational Conditions</h2>
+                <p class="text-gray-700 mb-6">
+                    No single model is universally "best"; each has strengths. Model selection should align with specific project goals and constraints.
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Conditions
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Recommended Model (Best to Least)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">High-noise environment</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Random Forest → Transformer → CNN → SVM → Logistic Regression → KNN → Decision Tree</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Limited data availability</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Logistic Regression → Support Vector Machines → Decision Tree → KNN → Random Forest → CNN → Transformer</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Predictive analytics (Early)</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Transformer → CNN → Random Forest → Support Vector Machines → KNN → Logistic Regression → Decision Tree</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Cost-sensitive (low false alarm)</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Logistic Regression → Support Vector Machines → Random Forest → Transformer → CNN → KNN → Decision Tree</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">High interpretability</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">Decision Tree → Logistic Regression → KNN → Random Forest → SVM → CNN → Transformer</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-4 rounded-t-lg shadow-inner mt-8">
+            <div class="container mx-auto text-center text-sm">
+                <p>&copy; 2025 Wind Turbine Predictive Maintenance Dashboard. All rights reserved.</p>
+                <p class="mt-2 text-gray-400">Data insights based on "Machine Learning for Wind Turbine Blade Failure Prediction: Analysing Vibration Data Effects on Maintenance Costs" by Renishkumar Mavani.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
